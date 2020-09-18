@@ -4,7 +4,7 @@ class Api {
     this.headers = headers;
   }
 
-  getInitial() {
+  _getInitial() {
     return fetch(`${this.baseUrl}/cards`, {
       headers: this.headers,
     }).then((res) => {
@@ -15,7 +15,7 @@ class Api {
     });
   }
 
-  getProfileInfo() {
+  _getProfileInfo() {
     return fetch(`${this.baseUrl}/users/me`, {
       headers: this.headers,
     }).then((res) => {
@@ -111,7 +111,7 @@ class Api {
   }
 
   getInitialData() {
-    return Promise.all([this.getInitial(), this.getProfileInfo()]);
+    return Promise.all([this._getInitial(), this._getProfileInfo()]);
   }
 }
 

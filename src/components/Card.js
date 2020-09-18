@@ -1,5 +1,5 @@
 import React from "react";
-import trashPath from "../../images/trash.png";
+import trashPath from "../images/trash.png";
 
 function Card({ name, likes, url, onCardClick, ...rest }) {
   const handleClick = () => onCardClick({ name, url });

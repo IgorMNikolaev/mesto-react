@@ -1,6 +1,6 @@
 import React from "react";
-import { api } from "../../utils/api.js";
-import Card from "../Card/Card.js";
+import { api } from "../utils/api.js";
+import Card from "./Card.js";
 
 function Main({ onEditProfile, onAddPlace, onEditAvatar, ...rest }) {
   const [userState, setUserState] = React.useState("");
@@ -9,24 +9,26 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, ...rest }) {
   const [cards, setCards] = React.useState([]);
 
   React.useEffect(() => {
-    api.getInitial().then((response) => {
-      const items = response.map((item) => ({
-        name: item.name,
-        likes: item.likes.length,
-        url: item.link,
-        id: item._id,
-      }));
-      setCards(items);
-    });
-  }, []);
-
-  React.useEffect(() => {
-    api.getProfileInfo().then((response) => {
-      setUserState(response.name);
-      setUserDescription(response.about);
-      setUserAvatar(response.avatar);
-    });
-  }, []);
+    api
+      .getInitialData()
+      .then((response) => {
+        const [cardsInfo, profileInfo] = response;
+        const { name, about, avatar } = profileInfo;
+        const items = cardsInfo.map((item) => ({
+          name: item.name,
+          likes: item.likes.length,
+          url: item.link,
+          id: item._id,
+        }));
+        setCards(items);
+        setUserState(name);
+        setUserDescription(about);
+        setUserAvatar(avatar);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },[]);
 
   return (
     <>

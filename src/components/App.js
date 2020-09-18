@@ -1,9 +1,9 @@
 import React from "react";
-import Header from "../Header/Header";
-import Main from "../Main/Main";
-import Footer from "../Footer/Footer";
-import PopupWithForm from "../PopupWithForm/PopupWithForm";
-import ImagePopup from "../ImagePopup/ImagePopup";
+import Header from "./Header";
+import Main from "./Main";
+import Footer from "./Footer";
+import PopupWithForm from "./PopupWithForm";
+import ImagePopup from "./ImagePopup";
 
 function App() {
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = React.useState(
@@ -36,8 +36,6 @@ function App() {
     setSelectedCard({});
   }
 
-  const emptyObj = {};
-
   return (
     <>
       <Header />
@@ -51,7 +49,7 @@ function App() {
       <PopupWithForm
         name="popup-edit"
         title="Редактировать профиль"
-        isOpen={isEditProfilePopupOpen ? "popup_opened" : ""}
+        isOpen={isEditProfilePopupOpen}
         onClose={closeAllPopups}
       >
         <div className="popup__input-cover">
@@ -86,7 +84,7 @@ function App() {
       <PopupWithForm
         name="popup-add"
         title="Новое место"
-        isOpen={isAddPlacePopupOpen ? "popup_opened" : ""}
+        isOpen={isAddPlacePopupOpen}
         onClose={closeAllPopups}
       >
         <div className="popup__input-cover">
@@ -120,7 +118,7 @@ function App() {
       <PopupWithForm
         name="popup-avatar"
         title="Обновить аватар"
-        isOpen={isEditAvatarPopupOpen ? "popup_opened" : ""}
+        isOpen={isEditAvatarPopupOpen}
         onClose={closeAllPopups}
       >
         <div className="popup__input-cover">
@@ -140,11 +138,7 @@ function App() {
           <p className="popup__loading-text">Сохранение...</p>
         </button>
       </PopupWithForm>
-      <ImagePopup
-        isOpen={"name" in selectedCard ? "popup_opened" : ""}
-        card={selectedCard}
-        onClose={closeAllPopups}
-      />
+      <ImagePopup card={selectedCard} onClose={closeAllPopups} />
     </>
   );
 }
