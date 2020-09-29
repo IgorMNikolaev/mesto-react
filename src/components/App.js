@@ -117,8 +117,8 @@ function App() {
   const handleCardDelete = (_id) => {
     api
       .deleteCard(_id)
-      .then(() =>{
-      setCards(cards.filter((card)=>(card._id !== _id)))
+      .then(() => {
+        setCards(cards.filter((card) => card._id !== _id));
       })
       .catch((error) => {
         console.log(error);
