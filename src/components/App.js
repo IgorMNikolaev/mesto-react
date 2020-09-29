@@ -102,11 +102,9 @@ function App() {
     const isLiked = likes.some((i) => i._id === currentUser._id);
     (isLiked ? api.deleteLike(_id) : api.setLike(_id))
       .then((newCard) => {
-        // Формируем новый массив на основе имеющегося, подставляя в него новую карточку
         const newCards = cards.map((item) =>
           item._id === _id ? newCard : item
         );
-        // Обновляем стейт
         setCards(newCards);
       })
       .catch((error) => {
